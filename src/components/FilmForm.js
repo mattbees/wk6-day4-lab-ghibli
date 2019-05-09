@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './FilmForm.css';
 
 class FilmForm extends Component {
 
@@ -11,16 +12,20 @@ class FilmForm extends Component {
     }
     // this.createCategories = this.createCategories.bind(this);
     this.handleCategoryChange = this.handleCategoryChange.bind(this);
+    this.handleOptionChange = this.handleOptionChange.bind(this);
     this.getCategoryOptions = this.getCategoryOptions.bind(this);
     this.getFullOptions = this.getFullOptions.bind(this);
     this.mapFilteredOptions = this.mapFilteredOptions.bind(this);
-
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleCategoryChange(event) {
     this.setState({ category: event.target.value });
   };
 
+  handleOptionChange(event) {
+    this.setState({ categoryOption: event.target.value });
+  }
 
   getCategoryOptions() {
     const fullOptions = this.getFullOptions(this.state.category);
@@ -38,12 +43,11 @@ class FilmForm extends Component {
       return options.indexOf(option) === index;
     });
   };
-
   mapFilteredOptions(filteredOptions){
     return filteredOptions.map((option, index) => {
       return <option value={option} key={index}>{option}</option>
-    })
-  }
+    });
+  };
 
 
   createCategories() {
@@ -54,26 +58,33 @@ class FilmForm extends Component {
     return options;
   }
 
+  handleSubmit(event) {
+    event.preventDefault();
+    const category = this.state.category;
+    const categoryOption = this.state.categoryOption;
+    const filterCriteria = { category, categoryOption };
+    console.log(filterCriteria);
+    this.props.updateFilterCriteria(filterCriteria);
+  };
+
+
   render() {
     return(
       <>
-      <select onChange={this.handleCategoryChange}>
-        {this.createCategories()}
-      </select>
-      <select>
-        {this.getCategoryOptions()}
-      </select>
+        <form className='film-form' onSubmit={this.handleSubmit}>
+          <select className='ui selection dropdown' onChange={this.handleCategoryChange}>
+            {this.createCategories()}
+          </select>
+          <select className='ui selection dropdown' onChange={this.handleOptionChange}>
+            {this.getCategoryOptions()}
+          </select>
+          <input type='submit' className='ui button' value='View films' />
+          <span>Studio Ghibli</span>
+        </form>
       </>
     )
   }
 }
-
-
-// <option>{this.props.categories[0]}</option>;
-// <option>{this.props.categories[1]}</option>;
-// <option>{this.props.categories[2]}</option>;
-// <option>{this.props.categories[3]}</option>;
-// <option>{this.props.categories[4]}</option>;
 
 
 export default FilmForm;
