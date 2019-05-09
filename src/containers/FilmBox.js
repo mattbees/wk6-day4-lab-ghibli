@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
+import FilmForm from '../components/FilmForm';
+
 
 class FilmBox extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      films: []
+      films: [],
+      categories: ['title', 'director', 'producer', 'release_date', 'rt_score']
       // MORE STATE PROPERTIES
     }
+
+    
   };
 
   componentDidMount() {
@@ -17,10 +22,19 @@ class FilmBox extends Component {
     })
   }
 
+
+
+
   render() {
     console.log(this.state.films);
     return (
+      <>
       <h1>FilmBox</h1>
+      <FilmForm
+        categories={this.state.categories}
+        films={this.state.films}
+      />
+      </>
     )
   };
 
