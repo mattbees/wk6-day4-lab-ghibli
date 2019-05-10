@@ -71,16 +71,18 @@ class FilmForm extends Component {
   render() {
     return(
       <>
-        <form className='film-form' onSubmit={this.handleSubmit}>
-          <select className='ui selection dropdown' onChange={this.handleCategoryChange}>
-            {this.createCategories()}
-          </select>
-          <select className='ui selection dropdown' onChange={this.handleOptionChange}>
-            {this.getCategoryOptions()}
-          </select>
-          <input type='submit' className='ui button' value='View films' />
-          <span>Studio Ghibli</span>
-        </form>
+        <div className='film-form-div'>
+          <form className='film-form' onSubmit={this.handleSubmit}>
+            <select className='ui selection dropdown' onChange={this.handleCategoryChange}>
+              {this.createCategories()}
+            </select>
+            <select className='ui selection dropdown' onChange={this.handleOptionChange}>
+              {this.getCategoryOptions()}
+            </select>
+            <input type='submit' className='ui button' value='View films' />
+          </form>
+          <h1 className='film-form-heading'>Studio Ghibli</h1>
+        </div>
       </>
     )
   }

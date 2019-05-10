@@ -1,5 +1,6 @@
 .films-list {
   padding-top: 100px;
+  padding-bottom: 300px;
   background-image: url('./dragon.jpg');
   background-repeat: no-repeat;
   background-attachment: fixed;
